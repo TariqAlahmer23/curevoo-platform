@@ -1,0 +1,605 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  PATIENT
+  DOCTOR
+  ADMIN
+}
+
+enum Sex {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum OtpPurpose {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
+enum PatientLinkStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum DeletionRequestStatus {
+  PENDING
+  KEEP_AS_CREATED_PATIENT
+  REMOVE_ONLY
+}
+
+enum NotificationType {
+  PATIENT_DELETE_REQUEST
+}
+
+enum AppointmentStatus {
+  PENDING
+  CREATED
+  CONFIRMED
+  CANCELED
+}
+
+enum ConnectionRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum MedicalHistoryUpdateRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PsychologicalChatSender {
+  PATIENT
+  LIORA
+}
+
+enum PsychologicalExerciseType {
+  BOX_BREATHING
+  PROGRESSIVE_MUSCLE_RELAXATION
+}
+
+enum KnowledgeArticleCategory {
+  CANCER
+  WELLBEING
+  CUREVOO
+}
+
+enum EducationalSearchSafetyStatus {
+  ALLOWED
+  BLOCKED
+  CRISIS
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(PATIENT)
+  name         String?
+  phoneNumber  String?
+  age          Int?
+  isEmailVerified Boolean @default(false)
+  deletedAt     DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  patientProfile PatientProfile?
+  doctorProfile  DoctorProfile?
+  doctorSettings DoctorSettings?
+  otpCodes OtpCode[]
+  refreshTokenSessions RefreshTokenSession[]
+  doctorPatientLinksAsDoctor DoctorPatientLink[] @relation("DoctorLinks")
+  doctorPatientLinksAsPatient DoctorPatientLink[] @relation("PatientLinks")
+  createdPatients CreatedPatient[] @relation("DoctorCreatedPatients")
+  notifications Notification[] @relation("UserNotifications")
+  patientDeletionRequestsAsPatient PatientDeletionRequest[] @relation("DeletionPatient")
+  patientDeletionRequestsAsDoctor PatientDeletionRequest[] @relation("DeletionDoctor")
+  appointmentsAsPatient Appointment[] @relation("PatientAppointments")
+  appointmentsAsDoctor Appointment[] @relation("DoctorAppointments")
+  treatmentPlansAsPatient TreatmentPlan[] @relation("PatientTreatmentPlans")
+  treatmentPlansAsDoctor TreatmentPlan[] @relation("DoctorTreatmentPlans")
+  connectionRequestsAsDoctor DoctorConnectionRequest[] @relation("ConnectionRequestsDoctor")
+  connectionRequestsAsPatient DoctorConnectionRequest[] @relation("ConnectionRequestsPatient")
+  historyUpdateRequestsAsDoctor MedicalHistoryUpdateRequest[] @relation("HistoryUpdateDoctor")
+  historyUpdateRequestsAsPatient MedicalHistoryUpdateRequest[] @relation("HistoryUpdatePatient")
+  treatmentRecords TreatmentRecord[]
+  cancerTests CancerTest[]
+  cancerResistances CancerResistance[]
+  testRecords TestRecord[]
+  medicalHistories MedicalHistory[]
+  nsclcPredictionRunsAsPatient AiNsclcPredictionRun[] @relation("PatientNsclcPredictionRuns")
+  nsclcPredictionRunsAsDoctor AiNsclcPredictionRun[] @relation("DoctorNsclcPredictionRuns")
+  nsclcPredictionRunsAsDoctorForCreated AiNsclcPredictionRunCreated[] @relation("DoctorNsclcPredictionRunsCreated")
+  psychologicalChatSessions PsychologicalChatSession[]
+  psychologicalChatMessages PsychologicalChatMessage[]
+  psychologicalExerciseLogs PsychologicalExerciseLog[]
+  educationalSearchLogs EducationalSearchLog[]
+}
+
+model PatientProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  fullName       String?
+  address        String?
+  phoneNumber    String?
+  age            Int?
+  sex            Sex?
+  medicalHistory String?
+  riskFactors    Json?
+  qrCode         String?  @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model DoctorProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  fullName        String?
+  specialization  String?
+  workingAt       String?
+  avatar          String?
+  languages       Json?
+  location        String?
+  qualifications  String?
+  experience      Int?
+  bio             String?
+  photoUrl        String?
+  qrCode          String?  @unique
+  consultationFee Decimal? @db.Decimal(10, 2)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  availableTimes DoctorAvailableTime[]
+
+  @@index([isActive])
+  @@index([specialization])
+}
+
+model DoctorAvailableTime {
+  id        String   @id @default(cuid())
+  doctorId  String
+  dayOfWeek Int      @default(0)
+  startTime String?
+  endTime   String?
+  isOn      Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  doctor DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@unique([doctorId, dayOfWeek, startTime, endTime])
+  @@index([doctorId])
+}
+
+model DoctorSettings {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  language         String   @default("en")
+  notificationsEnabled Boolean @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model OtpCode {
+  id        String     @id @default(cuid())
+  userId    String
+  email     String
+  otpHash   String
+  purpose   OtpPurpose
+  expiresAt DateTime
+  attempts  Int        @default(0)
+  lockedUntil DateTime?
+  usedAt    DateTime?
+  createdAt DateTime   @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, purpose])
+  @@index([email, purpose])
+}
+
+model RefreshTokenSession {
+  id            String   @id @default(cuid())
+  userId        String
+  jti           String   @unique
+  userAgent     String?
+  ipAddress     String?
+  expiresAt     DateTime
+  revokedAt     DateTime?
+  replacedByJti String?
+  revokeReason  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt, expiresAt])
+  @@index([expiresAt])
+}
+
+model DoctorPatientLink {
+  id             String            @id @default(cuid())
+  doctorUserId   String
+  patientUserId  String
+  status         PatientLinkStatus @default(ACTIVE)
+  createdByDoctor Boolean          @default(false)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  doctor  User @relation("DoctorLinks", fields: [doctorUserId], references: [id], onDelete: Cascade)
+  patient User @relation("PatientLinks", fields: [patientUserId], references: [id], onDelete: Cascade)
+
+  @@unique([doctorUserId, patientUserId])
+  @@index([doctorUserId, status])
+  @@index([patientUserId, status])
+}
+
+model DoctorConnectionRequest {
+  id            String                  @id @default(cuid())
+  doctorUserId  String
+  patientUserId String
+  status        ConnectionRequestStatus @default(PENDING)
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+  respondedAt   DateTime?
+
+  doctor  User @relation("ConnectionRequestsDoctor", fields: [doctorUserId], references: [id], onDelete: Cascade)
+  patient User @relation("ConnectionRequestsPatient", fields: [patientUserId], references: [id], onDelete: Cascade)
+
+  @@unique([doctorUserId, patientUserId])
+  @@index([doctorUserId, status, createdAt])
+  @@index([patientUserId, status, createdAt])
+}
+
+model CreatedPatient {
+  id                String   @id @default(cuid())
+  doctorUserId      String
+  sourcePatientUserId String?
+  fullName          String?
+  phoneNumber       String?
+  age               Int?
+  sex               Sex?
+  medicalHistory    String?
+  riskFactors       Json?
+  createdAt         DateTime @default(now())
+
+  doctor User @relation("DoctorCreatedPatients", fields: [doctorUserId], references: [id], onDelete: Cascade)
+  appointments Appointment[]
+  medicalHistories MedicalHistory[]
+  treatmentPlans TreatmentPlan[]
+  nsclcPredictionRuns AiNsclcPredictionRunCreated[]
+
+  @@unique([doctorUserId, sourcePatientUserId])
+  @@index([doctorUserId])
+}
+
+model PatientDeletionRequest {
+  id          String                @id @default(cuid())
+  patientUserId String
+  doctorUserId String
+  status      DeletionRequestStatus @default(PENDING)
+  createdAt   DateTime              @default(now())
+  resolvedAt  DateTime?
+
+  patient User @relation("DeletionPatient", fields: [patientUserId], references: [id], onDelete: Cascade)
+  doctor  User @relation("DeletionDoctor", fields: [doctorUserId], references: [id], onDelete: Cascade)
+
+  @@unique([patientUserId, doctorUserId])
+  @@index([doctorUserId, status])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  payload   Json?
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user User @relation("UserNotifications", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+}
+
+model Appointment {
+  id           String            @id @default(cuid())
+  patientUserId String?
+  createdPatientId String?
+  doctorUserId String
+  scheduledAt  DateTime
+  appointmentEnd DateTime?
+  reason       String?
+  notes        String?
+  status       AppointmentStatus @default(PENDING)
+  canceledAt   DateTime?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  patient User? @relation("PatientAppointments", fields: [patientUserId], references: [id], onDelete: Cascade)
+  createdPatient CreatedPatient? @relation(fields: [createdPatientId], references: [id], onDelete: Cascade)
+  doctor  User @relation("DoctorAppointments", fields: [doctorUserId], references: [id], onDelete: Cascade)
+
+  @@index([patientUserId, createdAt])
+  @@index([createdPatientId, createdAt])
+  @@index([doctorUserId, scheduledAt])
+  @@index([status, scheduledAt])
+}
+
+model TreatmentRecord {
+  id                   String   @id @default(cuid())
+  patientUserId        String
+  curevooDetectorResult String?
+  record               String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  patient User @relation(fields: [patientUserId], references: [id], onDelete: Cascade)
+
+  @@index([patientUserId, createdAt])
+}
+
+model TreatmentPlan {
+  id            String   @id @default(cuid())
+  doctorUserId  String
+  patientUserId String?
+  createdPatientId String?
+  symptomsLog   Json?
+  treatmentPlan Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  doctor  User @relation("DoctorTreatmentPlans", fields: [doctorUserId], references: [id], onDelete: Cascade)
+  patient User? @relation("PatientTreatmentPlans", fields: [patientUserId], references: [id], onDelete: Cascade)
+  createdPatient CreatedPatient? @relation(fields: [createdPatientId], references: [id], onDelete: Cascade)
+  symptomLogs SymptomLog[]
+
+  @@index([doctorUserId, createdAt])
+  @@index([patientUserId, createdAt])
+  @@index([createdPatientId, createdAt])
+}
+
+model SymptomLog {
+  id              String   @id @default(cuid())
+  treatmentPlanId String
+  symptomType     String?
+  symptomDetails  String?
+  notes           String?
+  logDate         DateTime @default(now())
+
+  treatmentPlan TreatmentPlan @relation(fields: [treatmentPlanId], references: [id], onDelete: Cascade)
+
+  @@index([treatmentPlanId, logDate])
+}
+
+model CancerTest {
+  id             String   @id @default(cuid())
+  patientUserId  String
+  testDate       DateTime @default(now())
+  result         String?
+  testEnteredData Json?
+  createdAt      DateTime @default(now())
+
+  patient User @relation(fields: [patientUserId], references: [id], onDelete: Cascade)
+
+  @@index([patientUserId, testDate])
+}
+
+model TestRecord {
+  id             String   @id @default(cuid())
+  patientUserId  String
+  recordDate     DateTime @default(now())
+  recordTitle    String?
+  testRecordData Json?
+  createdAt      DateTime @default(now())
+
+  patient User @relation(fields: [patientUserId], references: [id], onDelete: Cascade)
+  cancerResistances CancerResistance[]
+
+  @@index([patientUserId, recordDate])
+}
+
+model CancerResistance {
+  id              String   @id @default(cuid())
+  patientUserId   String
+  numberOfRecords Int      @default(0)
+  aiResult        String?
+  lastAdd         DateTime?
+  testRecordId    String?
+  createdAt       DateTime @default(now())
+
+  patient User @relation(fields: [patientUserId], references: [id], onDelete: Cascade)
+  testRecord TestRecord? @relation(fields: [testRecordId], references: [id], onDelete: SetNull)
+
+  @@index([patientUserId, createdAt])
+  @@index([testRecordId])
+}
+
+model MedicalHistory {
+  id            String   @id @default(cuid())
+  patientUserId String?
+  createdPatientId String?
+  record        Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  patient User? @relation(fields: [patientUserId], references: [id], onDelete: Cascade)
+  createdPatient CreatedPatient? @relation(fields: [createdPatientId], references: [id], onDelete: Cascade)
+  updateRequests MedicalHistoryUpdateRequest[]
+
+  @@index([patientUserId, createdAt])
+  @@index([createdPatientId, createdAt])
+}
+
+model MedicalHistoryUpdateRequest {
+  id              String                           @id @default(cuid())
+  medicalHistoryId String
+  doctorUserId    String
+  patientUserId   String?
+  proposedRecord  Json
+  status          MedicalHistoryUpdateRequestStatus @default(PENDING)
+  createdAt       DateTime                         @default(now())
+  updatedAt       DateTime                         @updatedAt
+  respondedAt     DateTime?
+
+  medicalHistory MedicalHistory @relation(fields: [medicalHistoryId], references: [id], onDelete: Cascade)
+  doctor         User           @relation("HistoryUpdateDoctor", fields: [doctorUserId], references: [id], onDelete: Cascade)
+  patient        User?          @relation("HistoryUpdatePatient", fields: [patientUserId], references: [id], onDelete: Cascade)
+
+  @@unique([medicalHistoryId, doctorUserId, patientUserId])
+  @@index([doctorUserId, status, createdAt])
+  @@index([patientUserId, status, createdAt])
+}
+
+model AiNsclcPredictionRun {
+  id                       String   @id @default(cuid())
+  patientId                String   @map("patient_id")
+  doctorId                 String   @map("doctor_id")
+  predictionVersion        String?  @map("prediction_version")
+  requestPayloadJson       Json     @map("request_payload_json")
+  responseJson             Json?    @map("response_json")
+  summaryText              String?  @map("summary_text")
+  earlyFailureProbability  Float?   @map("early_failure_probability")
+  earlyFailureRiskLevel    String?  @map("early_failure_risk_level")
+  durableBenefitProbability Float?  @map("durable_benefit_probability")
+  durableBenefitRiskLevel  String?  @map("durable_benefit_risk_level")
+  interpretationSummary    String?  @map("interpretation_summary")
+  llmExplanationEnabled    Boolean  @default(false) @map("llm_explanation_enabled")
+  status                   String
+  errorMessage             String?  @map("error_message")
+  createdAt                DateTime @default(now()) @map("created_at")
+
+  patient User @relation("PatientNsclcPredictionRuns", fields: [patientId], references: [id], onDelete: Cascade)
+  doctor User @relation("DoctorNsclcPredictionRuns", fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, createdAt])
+  @@index([doctorId, createdAt])
+  @@index([status, createdAt])
+  @@map("ai_nsclc_prediction_runs")
+}
+
+model AiNsclcPredictionRunCreated {
+  id                       String   @id @default(cuid())
+  createdPatientId         String   @map("created_patient_id")
+  doctorId                 String   @map("doctor_id")
+  predictionVersion        String?  @map("prediction_version")
+  requestPayloadJson       Json     @map("request_payload_json")
+  responseJson             Json?    @map("response_json")
+  summaryText              String?  @map("summary_text")
+  earlyFailureProbability  Float?   @map("early_failure_probability")
+  earlyFailureRiskLevel    String?  @map("early_failure_risk_level")
+  durableBenefitProbability Float?  @map("durable_benefit_probability")
+  durableBenefitRiskLevel  String?  @map("durable_benefit_risk_level")
+  interpretationSummary    String?  @map("interpretation_summary")
+  llmExplanationEnabled    Boolean  @default(false) @map("llm_explanation_enabled")
+  status                   String
+  errorMessage             String?  @map("error_message")
+  createdAt                DateTime @default(now()) @map("created_at")
+
+  createdPatient CreatedPatient @relation(fields: [createdPatientId], references: [id], onDelete: Cascade)
+  doctor         User           @relation("DoctorNsclcPredictionRunsCreated", fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@index([createdPatientId, createdAt])
+  @@index([doctorId, createdAt])
+  @@index([status, createdAt])
+  @@map("ai_nsclc_prediction_runs_created")
+}
+
+model PsychologicalChatSession {
+  id             String   @id @default(cuid())
+  patientId      String   @unique @map("patient_id")
+  gracePatientId String?  @map("grace_patient_id")
+  sessionId      String?  @map("session_id")
+  redirectUrl    String?  @map("redirect_url")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  patient  User                     @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  messages PsychologicalChatMessage[]
+
+  @@index([patientId, updatedAt])
+  @@map("psychological_chat_sessions")
+}
+
+model PsychologicalChatMessage {
+  id            String                @id @default(cuid())
+  patientId     String                @map("patient_id")
+  chatSessionId String?               @map("chat_session_id")
+  sessionId     String?               @map("session_id")
+  sender        PsychologicalChatSender
+  message       String
+  createdAt     DateTime              @default(now()) @map("created_at")
+
+  patient     User                    @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  chatSession PsychologicalChatSession? @relation(fields: [chatSessionId], references: [id], onDelete: SetNull)
+
+  @@index([patientId, createdAt])
+  @@index([sessionId, createdAt])
+  @@index([chatSessionId, createdAt])
+  @@map("psychological_chat_messages")
+}
+
+model PsychologicalExerciseLog {
+  id              String                    @id @default(cuid())
+  patientId       String                    @map("patient_id")
+  exerciseType    PsychologicalExerciseType @map("exercise_type")
+  durationMinutes Int?                      @map("duration_minutes")
+  completedAt     DateTime                  @default(now()) @map("completed_at")
+
+  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, completedAt])
+  @@index([exerciseType, completedAt])
+  @@map("psychological_exercise_logs")
+}
+
+model KnowledgeArticle {
+  id                 String                   @id @default(cuid())
+  title              String
+  slug               String                   @unique
+  category           KnowledgeArticleCategory
+  summary            String
+  content            String
+  sources            Json?
+  language           String                   @default("en")
+  readingTimeMinutes Int?                     @map("reading_time_minutes")
+  isPublished        Boolean                  @default(true) @map("is_published")
+  createdAt          DateTime                 @default(now()) @map("created_at")
+  updatedAt          DateTime                 @updatedAt @map("updated_at")
+
+  @@index([category, language, isPublished])
+  @@index([language, isPublished, createdAt])
+  @@map("knowledge_articles")
+}
+
+model EducationalSearchLog {
+  id           String                        @id @default(cuid())
+  patientId    String                        @map("patient_id")
+  question     String
+  answerSummary String?                      @map("answer_summary")
+  safetyStatus EducationalSearchSafetyStatus @map("safety_status")
+  createdAt    DateTime                      @default(now()) @map("created_at")
+
+  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, createdAt])
+  @@index([safetyStatus, createdAt])
+  @@map("educational_search_logs")
+}

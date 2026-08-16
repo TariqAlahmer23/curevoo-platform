@@ -1,0 +1,32 @@
+NCG File Inspection Report
+==========================
+Requested NCG directory: C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\ncg
+Directory used: C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels
+
+File: NCG_cancerdrivers_annotation_supporting_evidence.tsv
+Path: C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\NCG_cancerdrivers_annotation_supporting_evidence.tsv
+Detected separator: tab
+Shape: 8886 rows x 14 columns
+Columns:
+entrez, symbol, pubmed_id, type, organ_system, primary_site, cancer_type, method, coding_status, cgc_annotation, vogelstein_annotation, saito_annotation, NCG_oncogene, NCG_tsg
+First 5 rows:
+ entrez symbol  pubmed_id                    type              organ_system primary_site           cancer_type       method coding_status   cgc_annotation vogelstein_annotation saito_annotation  NCG_oncogene  NCG_tsg
+     23  ABCF1   31444325                 WGS-WES Hematologic and lymphatic        blood      multiple_myeloma       dNdScv        coding              NaN                   NaN              NaN           NaN      NaN
+     25   ABL1   29625053              Pan-cancer                  Multiple     multiple      pan-cancer_adult  PanSoftWare        coding oncogene, fusion              Oncogene              NaN           1.0      0.0
+     25   ABL1   14993899 Canonical Cancer Driver                  Multiple     multiple                   NaN            -           NaN oncogene, fusion              Oncogene              NaN           1.0      0.0
+     25   ABL1   29489755              Pan-cancer                  Multiple     multiple pan-cancer_paediatric GRIN, MutSig        coding oncogene, fusion              Oncogene              NaN           1.0      0.0
+     25   ABL1   23539594 Canonical Cancer Driver                  Multiple     multiple                   NaN            -           NaN oncogene, fusion              Oncogene              NaN           1.0      0.0
+
+File: NCG_cancerdrivers_systemslevelproperties.tsv
+Path: C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\NCG_cancerdrivers_systemslevelproperties.tsv
+Detected separator: tab
+Shape: 3347 rows x 19 columns
+Columns:
+entrez, symbol, duplicability, origin, essential_celllines_percentage, ppin_degree, ppin_betweenness, ppin_clustering, complexes, mirna, expressed_tissues_mRNA_GTEx, expressed_tissues_mRNA_protatlas, expressed_tissues_protein_protatlas, expressed_celllines_CLP, expressed_celllines_GNE, expressed_celllines_CCLE, germline_SNVs, germline_SVs, LOEUF_score
+First 5 rows:
+ entrez symbol  duplicability                         origin  essential_celllines_percentage  ppin_degree  ppin_betweenness  ppin_clustering  complexes  mirna  expressed_tissues_mRNA_GTEx  expressed_tissues_mRNA_protatlas  expressed_tissues_protein_protatlas  expressed_celllines_CLP  expressed_celllines_GNE  expressed_celllines_CCLE  germline_SNVs  germline_SVs  LOEUF_score
+     23  ABCF1              0 Last Universal Common Ancestor                        36.17800          102          15570.10         0.226364          1     83                         30.0                              41.0                                   41                    934.0                    675.0                    1019.0       0.063905           NaN        0.612
+     25   ABL1              0 Last Universal Common Ancestor                         0.62333          369         234395.00         0.057765         13     65                         30.0                              38.0                                   38                    951.0                    675.0                    1019.0       0.048448      0.000870        0.176
+     27   ABL2              0 Last Universal Common Ancestor                         0.00000           69           3987.77         0.192242          4    103                         30.0                              36.0                                   36                    958.0                    675.0                    1018.0       0.067964      0.000564        0.580
+     48   ACO1              0 Last Universal Common Ancestor                         0.00000           26           2265.63         0.107692          2     20                         30.0                              43.0                                   43                    918.0                    672.0                    1007.0       0.118860           NaN        0.932
+     60   ACTB             38 Last Universal Common Ancestor                        16.57280          609         435379.00         0.072833         85    105                         30.0                              43.0                                   43                    956.0                    675.0                    1019.0       0.003556      0.001778        0.232

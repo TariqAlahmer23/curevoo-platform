@@ -1,0 +1,55 @@
+DIP-AI Quality Audit Report
+===========================
+Status: PASS
+Total issues: 0
+
+Summary
+-------
+Required files checked: 6
+Tables loaded: target_features_v2, target_ranking_v3, target_ranking_v4, target_ranking_v6_evidence_tiers
+Final ranking rows: 17705
+Dashboard total_targets: 17705
+
+Final priority counts
+---------------------
+Low: 16981
+Medium: 722
+High: 2
+
+Evidence tier counts
+--------------------
+Tier_5_Low_Evidence_Target: 17671
+Tier_4_Passenger_Background_Like: 15
+Tier_3_LUAD_Driver_Moderate_Evidence: 8
+Tier_2_Actionable_With_Safety_Caution: 5
+Tier_1_Strong_Integrated_Target: 2
+Tier_2_Actionable_Safety_Supported: 2
+Tier_3_Dormancy_Exploratory_Target: 2
+
+Target category counts
+----------------------
+General Candidate: 17653
+Passenger-like / Background Mutation: 15
+Driver / LUAD Relevant: 14
+Dormancy / Residual Exploratory: 12
+Clinically Actionable / Safety Caution: 6
+Clinically Actionable / Safety Supported: 5
+
+Check issue counts
+------------------
+required_files: 0
+target_features_v2_required_columns: 0
+target_ranking_v3_required_columns: 0
+target_ranking_v4_required_columns: 0
+final_ranking_required_columns: 0
+final_ranking_duplicate_genes: 0
+score_ranges: 0
+v4_safety_logic: 0
+priority_logic: 0
+evidence_tier_logic: 0
+biological_sanity: 0
+dashboard_consistency: 0
+
+Issues
+------
+No issues detected.

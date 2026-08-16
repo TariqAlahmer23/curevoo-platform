@@ -1,0 +1,16 @@
+CIViC External Labels Summary
+=============================
+Files used:
+- C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\civic\nightly-ClinicalEvidenceSummaries.tsv
+- C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\civic\nightly-GeneSummaries.tsv
+Total CIViC positive genes: 861
+
+Evidence type counts
+--------------------
+evidence_type
+civic_clinical_evidence;civic_gene_summary    524
+civic_gene_summary                            337
+
+First 50 genes
+--------------
+ABCB1, ABCC10, ABCC3, ABCG2, ABI1, ABL1, ABL2, ACT, ACTA1, ACTB, ACTL6A, ACVR1, ADAD2-AS1, AEBP1, AFAP1, AFDN, AFF2, AGGF1, AGK, AGR2, AHCYL1, AIMP2, AKAP9, AKT1, AKT2, AKT3, ALCAM, ALDH1A2, ALK, AMER1, ANO10, APC, APP, AR, ARAF, AREG, ARHGAP26, ARHGAP35, ARHGEF2, ARID1A, ARID1B, ARID2, ASCL1, ASNS, ASPSCR1, ASS1, ASXL1, ATF1, ATF7IP, ATG12

@@ -1,0 +1,14 @@
+# Runtime dependencies for the FastAPI service only.
+#
+# The request path imports pandas and numpy and nothing heavier — scikit-learn,
+# scipy and xgboost are used exclusively by the offline training scripts in
+# scripts/, which never run inside the deployed container. Keeping them out cuts
+# the image substantially.
+#
+# Use requirements.txt instead when running the training or benchmark pipeline.
+fastapi
+uvicorn[standard]
+pydantic
+pandas
+numpy
+python-multipart

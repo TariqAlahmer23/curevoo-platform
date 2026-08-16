@@ -1,0 +1,275 @@
+{
+  "total_targets": 17705,
+  "high_priority_count": 2,
+  "medium_priority_count": 722,
+  "low_priority_count": 16981,
+  "evidence_tier_counts": {
+    "Tier_5_Low_Evidence_Target": 17671,
+    "Tier_4_Passenger_Background_Like": 15,
+    "Tier_3_LUAD_Driver_Moderate_Evidence": 8,
+    "Tier_2_Actionable_With_Safety_Caution": 5,
+    "Tier_1_Strong_Integrated_Target": 2,
+    "Tier_2_Actionable_Safety_Supported": 2,
+    "Tier_3_Dormancy_Exploratory_Target": 2
+  },
+  "target_category_counts": {
+    "General Candidate": 17653,
+    "Passenger-like / Background Mutation": 15,
+    "Driver / LUAD Relevant": 14,
+    "Dormancy / Residual Exploratory": 12,
+    "Clinically Actionable / Safety Caution": 6,
+    "Clinically Actionable / Safety Supported": 5
+  },
+  "top_targets": [
+    {
+      "gene_name": "TP53",
+      "score": 0.7467469989859153,
+      "priority": "High",
+      "evidence_tier": "Tier_1_Strong_Integrated_Target",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Strong integrated evidence from LUAD relevance, mutation/expression/protein-impact, and acceptable safety"
+    },
+    {
+      "gene_name": "KRAS",
+      "score": 0.7165309747578339,
+      "priority": "High",
+      "evidence_tier": "Tier_1_Strong_Integrated_Target",
+      "category": "Clinically Actionable / Safety Caution",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Strong integrated evidence from LUAD relevance, mutation/expression/protein-impact, and acceptable safety"
+    },
+    {
+      "gene_name": "EGFR",
+      "score": 0.648261370270435,
+      "priority": "Medium",
+      "evidence_tier": "Tier_2_Actionable_With_Safety_Caution",
+      "category": "Clinically Actionable / Safety Caution",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Clinically actionable LUAD target, but normal lung expression requires safety review"
+    },
+    {
+      "gene_name": "RET",
+      "score": 0.6344917667131517,
+      "priority": "Medium",
+      "evidence_tier": "Tier_2_Actionable_Safety_Supported",
+      "category": "Clinically Actionable / Safety Supported",
+      "safety_score": 1.0,
+      "safety_risk": "Low_Normal_Expression",
+      "explanation": "Clinically actionable LUAD target with low or moderate normal lung expression"
+    },
+    {
+      "gene_name": "KEAP1",
+      "score": 0.596899031339233,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_LUAD_Driver_Moderate_Evidence",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "LUAD-relevant driver with moderate evidence but not high enough for Tier 1"
+    },
+    {
+      "gene_name": "ALK",
+      "score": 0.5921365493153262,
+      "priority": "Medium",
+      "evidence_tier": "Tier_2_Actionable_Safety_Supported",
+      "category": "Clinically Actionable / Safety Supported",
+      "safety_score": 1.0,
+      "safety_risk": "Low_Normal_Expression",
+      "explanation": "Clinically actionable LUAD target with low or moderate normal lung expression"
+    },
+    {
+      "gene_name": "BRAF",
+      "score": 0.5900874854171028,
+      "priority": "Medium",
+      "evidence_tier": "Tier_2_Actionable_With_Safety_Caution",
+      "category": "Clinically Actionable / Safety Caution",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Clinically actionable LUAD target, but normal lung expression requires safety review"
+    },
+    {
+      "gene_name": "ROS1",
+      "score": 0.585490596502775,
+      "priority": "Medium",
+      "evidence_tier": "Tier_2_Actionable_With_Safety_Caution",
+      "category": "Clinically Actionable / Safety Caution",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Clinically actionable LUAD target, but normal lung expression requires safety review"
+    },
+    {
+      "gene_name": "MET",
+      "score": 0.5810250611106098,
+      "priority": "Medium",
+      "evidence_tier": "Tier_2_Actionable_With_Safety_Caution",
+      "category": "Clinically Actionable / Safety Caution",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Clinically actionable LUAD target, but normal lung expression requires safety review"
+    },
+    {
+      "gene_name": "ATM",
+      "score": 0.5777184817680159,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_LUAD_Driver_Moderate_Evidence",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.75,
+      "safety_risk": "Moderate_Normal_Expression",
+      "explanation": "LUAD-relevant driver with moderate evidence but not high enough for Tier 1"
+    },
+    {
+      "gene_name": "CDKN2A",
+      "score": 0.5554051138216871,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_LUAD_Driver_Moderate_Evidence",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.75,
+      "safety_risk": "Moderate_Normal_Expression",
+      "explanation": "LUAD-relevant driver with moderate evidence but not high enough for Tier 1"
+    },
+    {
+      "gene_name": "ERBB2",
+      "score": 0.5549246058276986,
+      "priority": "Medium",
+      "evidence_tier": "Tier_2_Actionable_With_Safety_Caution",
+      "category": "Clinically Actionable / Safety Caution",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Clinically actionable LUAD target, but normal lung expression requires safety review"
+    },
+    {
+      "gene_name": "STK11",
+      "score": 0.5455955407826508,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_LUAD_Driver_Moderate_Evidence",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "LUAD-relevant driver with moderate evidence but not high enough for Tier 1"
+    },
+    {
+      "gene_name": "COL11A1",
+      "score": 0.5381872173533779,
+      "priority": "Medium",
+      "evidence_tier": "Tier_5_Low_Evidence_Target",
+      "category": "General Candidate",
+      "safety_score": 1.0,
+      "safety_risk": "Low_Normal_Expression",
+      "explanation": "Insufficient integrated evidence"
+    },
+    {
+      "gene_name": "SMARCA4",
+      "score": 0.5369222670734995,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_LUAD_Driver_Moderate_Evidence",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "LUAD-relevant driver with moderate evidence but not high enough for Tier 1"
+    },
+    {
+      "gene_name": "SETD2",
+      "score": 0.529646170741021,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_LUAD_Driver_Moderate_Evidence",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "LUAD-relevant driver with moderate evidence but not high enough for Tier 1"
+    },
+    {
+      "gene_name": "MAP2K1",
+      "score": 0.5205360660040906,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_LUAD_Driver_Moderate_Evidence",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "LUAD-relevant driver with moderate evidence but not high enough for Tier 1"
+    },
+    {
+      "gene_name": "ARID1A",
+      "score": 0.5154407243062068,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_LUAD_Driver_Moderate_Evidence",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "LUAD-relevant driver with moderate evidence but not high enough for Tier 1"
+    },
+    {
+      "gene_name": "SOX2",
+      "score": 0.4947807508277804,
+      "priority": "Medium",
+      "evidence_tier": "Tier_3_Dormancy_Exploratory_Target",
+      "category": "Dormancy / Residual Exploratory",
+      "safety_score": 1.0,
+      "safety_risk": "Low_Normal_Expression",
+      "explanation": "Exploratory dormancy/residual disease relevance; research-use only"
+    },
+    {
+      "gene_name": "PIK3CA",
+      "score": 0.4915433663261147,
+      "priority": "Medium",
+      "evidence_tier": "Tier_5_Low_Evidence_Target",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Insufficient integrated evidence"
+    },
+    {
+      "gene_name": "RBM10",
+      "score": 0.4885041220309003,
+      "priority": "Medium",
+      "evidence_tier": "Tier_5_Low_Evidence_Target",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.2,
+      "safety_risk": "Very_High_Normal_Expression",
+      "explanation": "Insufficient integrated evidence"
+    },
+    {
+      "gene_name": "CTNNB1",
+      "score": 0.4840768995474728,
+      "priority": "Medium",
+      "evidence_tier": "Tier_5_Low_Evidence_Target",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.2,
+      "safety_risk": "Very_High_Normal_Expression",
+      "explanation": "Insufficient integrated evidence"
+    },
+    {
+      "gene_name": "NFE2L2",
+      "score": 0.4784105970438125,
+      "priority": "Medium",
+      "evidence_tier": "Tier_5_Low_Evidence_Target",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.2,
+      "safety_risk": "Very_High_Normal_Expression",
+      "explanation": "Insufficient integrated evidence"
+    },
+    {
+      "gene_name": "NRAS",
+      "score": 0.4769715516047007,
+      "priority": "Medium",
+      "evidence_tier": "Tier_5_Low_Evidence_Target",
+      "category": "Driver / LUAD Relevant",
+      "safety_score": 0.45,
+      "safety_risk": "High_Normal_Expression",
+      "explanation": "Insufficient integrated evidence"
+    },
+    {
+      "gene_name": "PCLO",
+      "score": 0.4747194170356519,
+      "priority": "Medium",
+      "evidence_tier": "Tier_5_Low_Evidence_Target",
+      "category": "General Candidate",
+      "safety_score": 1.0,
+      "safety_risk": "Low_Normal_Expression",
+      "explanation": "Insufficient integrated evidence"
+    }
+  ]
+}

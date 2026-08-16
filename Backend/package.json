@@ -1,0 +1,52 @@
+{
+  "name": "curevoo",
+  "version": "1.0.0",
+  "description": "Doctor appointment and availability management system",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --runInBand",
+    "test:coverage": "jest --coverage --runInBand",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "admin:create": "node scripts/create-admin.js",
+    "ai:setup": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/ai/setup-venvs.ps1",
+    "ai:start": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/ai/start-local-ai.ps1",
+    "ai:status": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/ai/status-local-ai.ps1",
+    "ai:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/ai/stop-local-ai.ps1"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.0.0",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.11",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.14",
+    "prisma": "^6.19.2",
+    "supertest": "^7.2.2"
+  },
+  "engines": {
+    "node": ">=18.18.0",
+    "npm": ">=9.0.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./tests/setup.js"
+    ],
+    "testEnvironment": "node"
+  }
+}

@@ -1,0 +1,77 @@
+DIP-AI GTEx Lung Safety Features Summary
+=========================================
+GTEx file used: C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\gtex\GTEx_Analysis_2025-08-22_v11_RNASeQCv2.4.3_gene_median_tpm.gct.gz
+Total genes: 73321
+
+Safety risk counts:
+safety_risk
+Low_Normal_Expression          55163
+Moderate_Normal_Expression      8701
+High_Normal_Expression          6673
+Very_High_Normal_Expression     2784
+
+Top 30 highest normal lung TPM genes:
+gene_name  normal_lung_tpm  safety_score                 safety_risk                                                                                                                                  safety_note
+   MT-ND4         24594.20           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-CO2         23437.60           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+  MT-ATP6         22631.00           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-CO1         22146.10           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-CO3         19788.50           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+  MT-ATP8         14114.90           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-ND2         14078.80           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-ND1         13890.40           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-CYB         12579.60           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+  MT-ND4L         10828.20           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+  MT-RNR2          9556.14           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-ND3          8649.20           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-ND6          5472.47           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   MT-ND5          4711.32           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   TMSB10          4273.10           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    HLA-B          3894.59           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+      A2M          3539.83           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    RPS12          3479.59           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    SFTPB          3399.34           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+     ACTB          3340.93           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   TMSB4X          3336.43           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    RPS27          3285.25           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+      FTL          3184.06           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+      B2M          3019.43           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+     GPX3          2881.75           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+     IGKC          2850.13           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+     CD74          2820.14           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    RPS18          2817.13           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    RPS11          2521.21           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   S100A6          2451.26           0.2 Very_High_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+
+First 30 safest low-expression genes:
+ gene_name  normal_lung_tpm  safety_score           safety_risk                                                                                                                                  safety_note
+   5S_rRNA              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ 5_8S_rRNA              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+       7SK              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ A2ML1-AS1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ A2ML1-AS2              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+      AA06              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   AADACL3              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   AARS1P1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    ABALON              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ABCA15P              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ABCA3P1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+  ABCB10P1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+  ABCB10P3              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+  ABCB10P4              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ABCD1P2              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ABCD1P3              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ABCD1P4              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ABCD1P5              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ABCF2P1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ABCF2P2              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ABHD15-AS1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ ABHD17AP7              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ ABHD17AP8              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ ABHD17AP9              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    ABI1P1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ ABITRAMP1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+ABRAXAS1P1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+    ABT1P1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ACCSLP1              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.
+   ACE2-DT              0.0           1.0 Low_Normal_Expression Higher normal lung expression may reduce target safety priority because on-target activity in normal lung tissue could increase safety risk.

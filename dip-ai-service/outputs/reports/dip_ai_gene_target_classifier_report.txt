@@ -1,0 +1,18 @@
+DIP-AI Gene Target Classifier Report
+====================================
+External labels are derived from external biomedical knowledge bases. These metrics evaluate the model's ability to reproduce external target knowledge, not clinical treatment response or recurrence prediction.
+
+Status: SKIPPED
+Labeled genes: 17653
+Positive genes: 0
+Negative genes: 17653
+Feature columns: mutation_frequency_score, expression_score, protein_impact_score, ranking_score_v3, ranking_score_v4, normal_lung_tpm, safety_score, safety_penalty, luad_relevance_score, targetability_score, dormancy_evidence_score, passenger_penalty
+
+Warnings
+--------
+- Insufficient positive external labels: 0 found, minimum required is 20.
+- Only one external_label class is present. Training stopped.
+
+Cross-Validated Metrics
+-----------------------
+No model metrics were computed because training was skipped.

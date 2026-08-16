@@ -1,0 +1,15 @@
+DIP-AI Supervised ML Benchmark Report
+=====================================
+Research-use benchmark only. These metrics do not establish clinical validity.
+
+Status: SKIPPED
+Labeled patients: 0
+Class counts: {}
+
+Warnings
+--------
+- No labeled recurrence patients are available. Supervised ML evaluation is not reliable.
+
+Metrics
+-------
+No model metrics were computed because supervised evaluation was skipped.

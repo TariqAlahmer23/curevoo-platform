@@ -1,0 +1,121 @@
+DIP-AI NCG + CIViC Consensus Gene Benchmark
+==========================================
+Consensus labels from NCG and CIViC evaluate reproduction of external cancer-driver/clinical cancer evidence. These metrics do not validate recurrence prediction, treatment response, or clinical decision-making.
+
+External Evidence Coverage
+--------------------------
+NCG positive count: 3347
+CIViC positive count: 861
+NCG/CIViC overlap count: 517
+Any-source positive count in ranked-gene universe: 3505
+High-confidence positive count in ranked-gene universe: 504
+CIViC-only added positives in ranked-gene universe: 306
+Negative candidates in ranked-gene universe: 14200
+
+Classifier Datasets
+-------------------
+any_source:
+  Positives: 3505
+  Sampled negatives: 7010
+  Total genes: 10515
+high_confidence:
+  Positives: 504
+  Sampled negatives: 1008
+  Total genes: 1512
+
+Allowed raw features (13):
+mutation_count, mutated_patients, mutated_samples, nonsynonymous_mutation_count, missense_count, frameshift_count, nonsense_count, mean_tumor_expression, median_tumor_expression, max_tumor_expression, expression_detected_samples, expression_detection_rate, normal_lung_tpm
+
+Metrics
+-------
+     label_mode                   model_name  accuracy  balanced_accuracy  precision  recall  f1_score    mcc  roc_auc  pr_auc
+     any_source LogisticRegressionElasticNet    0.6720             0.6369     0.5076  0.5315    0.5193 0.2707   0.6866  0.5465
+     any_source       RandomForestClassifier    0.6906             0.5937     0.5674  0.3027    0.3948 0.2309   0.6614  0.5128
+     any_source                      XGBoost    0.6816             0.5927     0.5369  0.3261    0.4058 0.2176   0.6539  0.5044
+high_confidence LogisticRegressionElasticNet    0.6944             0.6900     0.5328  0.6766    0.5962 0.3625   0.7600  0.6229
+high_confidence       RandomForestClassifier    0.7348             0.6637     0.6467  0.4504    0.5310 0.3655   0.7491  0.6247
+high_confidence                      XGBoost    0.7030             0.6463     0.5647  0.4762    0.5167 0.3069   0.7172  0.5854
+
+Aggregate Out-of-Fold Confusion Matrices
+-----------------------------------------
+any_source / LogisticRegressionElasticNet: [[5203, 1807], [1642, 1863]]
+any_source / RandomForestClassifier: [[6201, 809], [2444, 1061]]
+any_source / XGBoost: [[6024, 986], [2362, 1143]]
+high_confidence / LogisticRegressionElasticNet: [[709, 299], [163, 341]]
+high_confidence / RandomForestClassifier: [[884, 124], [277, 227]]
+high_confidence / XGBoost: [[823, 185], [264, 240]]
+
+Top Feature Importances
+-----------------------
+any_source / LogisticRegressionElasticNet:
+- mutation_count: -1.37421
+- mutated_patients: 0.737566
+- mutated_samples: 0.723225
+- nonsynonymous_mutation_count: 0.522084
+- mean_tumor_expression: -0.189935
+- median_tumor_expression: 0.180606
+- expression_detection_rate: 0.16403
+- expression_detected_samples: 0.16403
+- normal_lung_tpm: 0.120687
+- missense_count: 0.0925311
+any_source / RandomForestClassifier:
+- max_tumor_expression: 0.142293
+- mean_tumor_expression: 0.138089
+- normal_lung_tpm: 0.133488
+- median_tumor_expression: 0.123165
+- nonsynonymous_mutation_count: 0.0670697
+- missense_count: 0.0621372
+- mutation_count: 0.0609933
+- mutated_patients: 0.0600257
+- mutated_samples: 0.0579109
+- expression_detected_samples: 0.0527682
+any_source / XGBoost:
+- nonsynonymous_mutation_count: 0.172146
+- mutated_patients: 0.121978
+- missense_count: 0.0878899
+- mutated_samples: 0.0838959
+- max_tumor_expression: 0.0772749
+- mean_tumor_expression: 0.0756808
+- expression_detected_samples: 0.0742576
+- normal_lung_tpm: 0.0703662
+- median_tumor_expression: 0.0672058
+- frameshift_count: 0.0612126
+high_confidence / LogisticRegressionElasticNet:
+- mutated_patients: 1.04682
+- mutation_count: -0.456958
+- median_tumor_expression: 0.443981
+- nonsynonymous_mutation_count: 0.406597
+- expression_detected_samples: 0.401624
+- expression_detection_rate: 0.401624
+- mutated_samples: 0.2671
+- normal_lung_tpm: 0.197402
+- max_tumor_expression: -0.136528
+- frameshift_count: 0.135536
+high_confidence / RandomForestClassifier:
+- max_tumor_expression: 0.125617
+- median_tumor_expression: 0.125213
+- mean_tumor_expression: 0.124548
+- normal_lung_tpm: 0.122426
+- mutated_patients: 0.0721046
+- missense_count: 0.0705501
+- mutation_count: 0.0670043
+- nonsynonymous_mutation_count: 0.0665758
+- mutated_samples: 0.0629981
+- expression_detected_samples: 0.0612139
+high_confidence / XGBoost:
+- mutated_samples: 0.170423
+- mutated_patients: 0.123548
+- expression_detected_samples: 0.123322
+- median_tumor_expression: 0.0829907
+- nonsynonymous_mutation_count: 0.0736806
+- missense_count: 0.0697464
+- max_tumor_expression: 0.0655926
+- normal_lung_tpm: 0.0615595
+- nonsense_count: 0.0597956
+- mean_tumor_expression: 0.0587901
+
+Interpretation
+--------------
+- CIViC increased external evidence coverage by 306 CIViC-only positive genes within the ranked-gene universe.
+- High-confidence labels improved mean ROC-AUC relative to any-source labels (mean delta=+0.0748; F1 delta=+0.1080 across matching models). Cohort sizes differ, so this is a benchmark comparison, not a paired clinical test.
+- The best raw-feature model achieved ROC-AUC=0.7600 and F1=0.5962 for high_confidence; this is moderate reproduction of external labels and does not establish clinical validity.

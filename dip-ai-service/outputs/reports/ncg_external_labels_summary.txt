@@ -1,0 +1,12 @@
+NCG External Labels Summary
+===========================
+Requested NCG directory: C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\ncg
+Directory used: C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels
+NCG files used:
+- C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\NCG_cancerdrivers_annotation_supporting_evidence.tsv
+- C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\NCG_cancerdrivers_systemslevelproperties.tsv
+Total positive genes: 3347
+Output path: C:\Users\sexyl\OneDrive\Desktop\dip-ai-service\data\external\labels\external_targets_ncg.csv
+
+First 50 genes:
+A1CF, A2ML1, AADACL4, ABCA10, ABCA13, ABCA7, ABCB1, ABCB5, ABCC3, ABCC5, ABCC9, ABCD1, ABCF1, ABCF2, ABCG2, ABCG8, ABHD15, ABI1, ABI3, ABL1, ABL2, ABLIM2, ACAN, ACD, ACE, ACKR3, ACO1, ACOXL, ACSL6, ACSM1, ACSM2A, ACSM4, ACTB, ACTG1, ACTL6B, ACTL7B, ACVR1, ACVR1B, ACVR2A, ACVR2B, ADAM10, ADAM2, ADAM22, ADAM29, ADAM7, ADAMTS12, ADAMTS17, ADAMTS18, ADAMTS19, ADAMTS20

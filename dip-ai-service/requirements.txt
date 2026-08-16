@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+fastapi
+uvicorn
+pydantic
+python-dotenv
+python-multipart
+requests
+pytest
+httpx

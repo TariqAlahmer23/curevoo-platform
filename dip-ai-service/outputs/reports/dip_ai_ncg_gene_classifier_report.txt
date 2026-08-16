@@ -1,0 +1,95 @@
+DIP-AI NCG Gene Target Classifier Report
+========================================
+NCG labels evaluate whether the model can reproduce external cancer-driver knowledge. These metrics do not validate recurrence prediction, treatment response, or clinical decision-making.
+
+NCG positive genes loaded: 3347
+NCG positives in classifier dataset: 3178
+Clean negatives selected: 6356
+Negative sampling rule: up to 2x positives, random_state=42
+
+Feature Sets
+------------
+base_features: mutation_frequency_score, expression_score, protein_impact_score, ranking_score_v3, ranking_score_v4, normal_lung_tpm, safety_score, safety_penalty
+knowledge_augmented: mutation_frequency_score, expression_score, protein_impact_score, ranking_score_v3, ranking_score_v4, normal_lung_tpm, safety_score, safety_penalty, luad_relevance_score, targetability_score, dormancy_evidence_score, passenger_penalty
+Warning: the knowledge_augmented benchmark includes curated knowledge features and should not be interpreted as a leakage-minimized benchmark.
+
+Metrics
+-------
+base_features / LogisticRegressionElasticNet: Accuracy=0.819, Balanced Accuracy=0.785, Precision=0.752, Recall=0.683, F1=0.716, MCC=0.585, ROC-AUC=0.842, PR-AUC=0.821
+base_features / RandomForestClassifier: Accuracy=0.857, Balanced Accuracy=0.801, Precision=0.914, Recall=0.631, F1=0.746, MCC=0.673, ROC-AUC=0.852, PR-AUC=0.838
+base_features / XGBoost: Accuracy=0.841, Balanced Accuracy=0.801, Precision=0.811, Recall=0.681, F1=0.740, MCC=0.632, ROC-AUC=0.850, PR-AUC=0.839
+knowledge_augmented / LogisticRegressionElasticNet: Accuracy=0.821, Balanced Accuracy=0.786, Precision=0.755, Recall=0.683, F1=0.717, MCC=0.588, ROC-AUC=0.841, PR-AUC=0.821
+knowledge_augmented / RandomForestClassifier: Accuracy=0.857, Balanced Accuracy=0.801, Precision=0.910, Recall=0.633, F1=0.747, MCC=0.672, ROC-AUC=0.852, PR-AUC=0.838
+knowledge_augmented / XGBoost: Accuracy=0.842, Balanced Accuracy=0.802, Precision=0.817, Recall=0.679, F1=0.742, MCC=0.635, ROC-AUC=0.848, PR-AUC=0.837
+
+Confusion Matrices
+------------------
+base_features / LogisticRegressionElasticNet: [[5639, 717], [1006, 2172]]
+base_features / RandomForestClassifier: [[6167, 189], [1173, 2005]]
+base_features / XGBoost: [[5853, 503], [1014, 2164]]
+knowledge_augmented / LogisticRegressionElasticNet: [[5651, 705], [1006, 2172]]
+knowledge_augmented / RandomForestClassifier: [[6156, 200], [1165, 2013]]
+knowledge_augmented / XGBoost: [[5872, 484], [1019, 2159]]
+
+Top Feature Importances
+-----------------------
+base_features / LogisticRegressionElasticNet:
+- normal_lung_tpm importance=12.4368
+- mutation_frequency_score importance=0.793857
+- ranking_score_v3 importance=0.497649
+- expression_score importance=-0.295867
+- safety_score importance=-0.259986
+- safety_penalty importance=0.259986
+- protein_impact_score importance=-0.258776
+- ranking_score_v4 importance=0.131031
+base_features / RandomForestClassifier:
+- normal_lung_tpm importance=0.221742
+- expression_score importance=0.15091
+- ranking_score_v4 importance=0.136757
+- ranking_score_v3 importance=0.12823
+- mutation_frequency_score importance=0.112754
+- safety_penalty importance=0.0976892
+- safety_score importance=0.0844904
+- protein_impact_score importance=0.0674261
+base_features / XGBoost:
+- safety_score importance=0.942156
+- mutation_frequency_score importance=0.015617
+- ranking_score_v4 importance=0.0144894
+- normal_lung_tpm importance=0.00723761
+- expression_score importance=0.00720628
+- ranking_score_v3 importance=0.0068205
+- protein_impact_score importance=0.00647318
+- safety_penalty importance=0
+knowledge_augmented / LogisticRegressionElasticNet:
+- normal_lung_tpm importance=12.1193
+- mutation_frequency_score importance=0.868923
+- safety_score importance=-0.225233
+- safety_penalty importance=0.225233
+- ranking_score_v3 importance=0.180632
+- targetability_score importance=0.169582
+- luad_relevance_score importance=0.16068
+- dormancy_evidence_score importance=0.129849
+- protein_impact_score importance=0.0454164
+- passenger_penalty importance=0.0434027
+knowledge_augmented / RandomForestClassifier:
+- normal_lung_tpm importance=0.228267
+- expression_score importance=0.137143
+- ranking_score_v4 importance=0.136895
+- ranking_score_v3 importance=0.127811
+- mutation_frequency_score importance=0.113876
+- safety_penalty importance=0.0982287
+- safety_score importance=0.0898831
+- protein_impact_score importance=0.0664763
+- passenger_penalty importance=0.00112558
+- targetability_score importance=0.000202547
+knowledge_augmented / XGBoost:
+- safety_score importance=0.935707
+- mutation_frequency_score importance=0.0160887
+- ranking_score_v4 importance=0.0147723
+- ranking_score_v3 importance=0.00744431
+- expression_score importance=0.0072884
+- normal_lung_tpm importance=0.00724102
+- protein_impact_score importance=0.00695282
+- targetability_score importance=0.00450495
+- safety_penalty importance=0
+- luad_relevance_score importance=0

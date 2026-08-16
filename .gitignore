@@ -1,0 +1,72 @@
+# ---------------------------------------------------------------------------
+# Secrets — never commit
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---------------------------------------------------------------------------
+# Dependencies and build output
+# ---------------------------------------------------------------------------
+node_modules/
+coverage/
+
+Frontend/build/
+Frontend/.dart_tool/
+Frontend/.flutter-plugins
+Frontend/.flutter-plugins-dependencies
+Frontend/windows/flutter/ephemeral/
+Frontend/linux/flutter/ephemeral/
+Frontend/macos/Flutter/ephemeral/
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# ---------------------------------------------------------------------------
+# Archives and local artifacts
+# ---------------------------------------------------------------------------
+*.zip
+Backend.zip
+
+# ---------------------------------------------------------------------------
+# AI service: raw pipeline inputs.
+#
+# These are the source data the offline pipeline consumes. They are large
+# (up to 178 MB, above GitHub's 100 MB per-file limit) and the FastAPI service
+# never opens them at request time. Only the derived artifacts listed in
+# dip-ai-service/README are needed to run the service.
+# ---------------------------------------------------------------------------
+dip-ai-service/data/processed/combined_*.csv
+dip-ai-service/data/processed/*_dataset.csv
+dip-ai-service/data/processed/external_gene_labels.csv
+dip-ai-service/data/processed/target_candidates_v1.csv
+dip-ai-service/data/processed/target_features_v2.csv
+dip-ai-service/data/processed/target_ranking_v3.csv
+dip-ai-service/data/processed/target_ranking_v4.csv
+dip-ai-service/data/processed/target_ranking_v5_evidence_tiers.csv
+dip-ai-service/data/processed/sample_mapping.csv
+dip-ai-service/data/processed/clinical_clean.csv
+
+dip-ai-service/data/external/gtex/
+dip-ai-service/data/external/labels/civic/
+dip-ai-service/data/external/labels/NCG_*.tsv
+dip-ai-service/data/external/labels/external_targets_ncg.csv
+dip-ai-service/data/external/labels/external_targets_civic.csv
+
+# Per-model prediction dumps — regenerable, not read at request time.
+dip-ai-service/outputs/reports/*predictions.csv
+# Per-request run artifacts written at runtime.
+dip-ai-service/outputs/reports/runs/
+
+# ---------------------------------------------------------------------------
+# Editor / OS
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

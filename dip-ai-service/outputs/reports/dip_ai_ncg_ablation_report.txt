@@ -1,0 +1,153 @@
+DIP-AI NCG Scientific Ablation Study
+====================================
+This ablation evaluates external NCG cancer-driver label reproduction, not recurrence, treatment response, or clinical decision-making.
+
+Status: COMPLETED
+Evaluation: stratified_5_fold_cross_validation
+Best-model rule: highest out-of-fold ROC-AUC within each experiment; F1 is the tie-breaker.
+
+Experiment Datasets
+-------------------
+A) random_negatives + raw_features
+  Positives: 3199
+  Sampled negatives: 6398
+  Eligible negative pool: 14506
+  Features (12): mutation_count, mutated_patients, mutated_samples, nonsynonymous_mutation_count, missense_count, frameshift_count, nonsense_count, mean_tumor_expression, median_tumor_expression, max_tumor_expression, expression_detected_samples, expression_detection_rate
+B) clean_negatives + raw_features
+  Positives: 3199
+  Sampled negatives: 6398
+  Eligible negative pool: 13961
+  Features (12): mutation_count, mutated_patients, mutated_samples, nonsynonymous_mutation_count, missense_count, frameshift_count, nonsense_count, mean_tumor_expression, median_tumor_expression, max_tumor_expression, expression_detected_samples, expression_detection_rate
+C) random_negatives + raw_plus_safety_raw
+  Positives: 3199
+  Sampled negatives: 6398
+  Eligible negative pool: 14506
+  Features (13): mutation_count, mutated_patients, mutated_samples, nonsynonymous_mutation_count, missense_count, frameshift_count, nonsense_count, mean_tumor_expression, median_tumor_expression, max_tumor_expression, expression_detected_samples, expression_detection_rate, normal_lung_tpm
+D) clean_negatives + raw_plus_safety_raw
+  Positives: 3199
+  Sampled negatives: 6398
+  Eligible negative pool: 13961
+  Features (13): mutation_count, mutated_patients, mutated_samples, nonsynonymous_mutation_count, missense_count, frameshift_count, nonsense_count, mean_tumor_expression, median_tumor_expression, max_tumor_expression, expression_detected_samples, expression_detection_rate, normal_lung_tpm
+E) clean_negatives + derived_scores
+  Positives: 3199
+  Sampled negatives: 6398
+  Eligible negative pool: 13961
+  Features (20): mutation_count, mutated_patients, mutated_samples, nonsynonymous_mutation_count, missense_count, frameshift_count, nonsense_count, mean_tumor_expression, median_tumor_expression, max_tumor_expression, expression_detected_samples, expression_detection_rate, normal_lung_tpm, mutation_frequency_score, expression_score, protein_impact_score, ranking_score_v3, ranking_score_v4, safety_score, safety_penalty
+F) clean_negatives + knowledge_augmented
+  Positives: 3199
+  Sampled negatives: 6398
+  Eligible negative pool: 13961
+  Features (24): mutation_count, mutated_patients, mutated_samples, nonsynonymous_mutation_count, missense_count, frameshift_count, nonsense_count, mean_tumor_expression, median_tumor_expression, max_tumor_expression, expression_detected_samples, expression_detection_rate, normal_lung_tpm, mutation_frequency_score, expression_score, protein_impact_score, ranking_score_v3, ranking_score_v4, safety_score, safety_penalty, luad_relevance_score, targetability_score, dormancy_evidence_score, passenger_penalty
+
+Metrics
+-------
+                            experiment                   model_name  accuracy  balanced_accuracy  precision  recall  f1_score    mcc  roc_auc  pr_auc
+       A_random_negatives_raw_features LogisticRegressionElasticNet    0.6647             0.6291     0.4972  0.5224    0.5095 0.2552   0.6856  0.5540
+       A_random_negatives_raw_features       RandomForestClassifier    0.6844             0.5909     0.5468  0.3104    0.3960 0.2188   0.6578  0.5106
+       A_random_negatives_raw_features                      XGBoost    0.6786             0.5877     0.5303  0.3148    0.3951 0.2075   0.6509  0.5017
+        B_clean_negatives_raw_features LogisticRegressionElasticNet    0.6657             0.6283     0.4986  0.5161    0.5072 0.2545   0.6840  0.5548
+        B_clean_negatives_raw_features       RandomForestClassifier    0.6874             0.5926     0.5561  0.3082    0.3966 0.2250   0.6581  0.5179
+        B_clean_negatives_raw_features                      XGBoost    0.6899             0.5984     0.5603  0.3239    0.4105 0.2352   0.6485  0.5152
+C_random_negatives_raw_plus_safety_raw LogisticRegressionElasticNet    0.6665             0.6313     0.4997  0.5258    0.5124 0.2594   0.6865  0.5537
+C_random_negatives_raw_plus_safety_raw       RandomForestClassifier    0.6915             0.5926     0.5719  0.2960    0.3901 0.2311   0.6675  0.5209
+C_random_negatives_raw_plus_safety_raw                      XGBoost    0.6738             0.5836     0.5176  0.3132    0.3903 0.1965   0.6450  0.4948
+ D_clean_negatives_raw_plus_safety_raw LogisticRegressionElasticNet    0.6674             0.6295     0.5011  0.5158    0.5083 0.2572   0.6851  0.5552
+ D_clean_negatives_raw_plus_safety_raw       RandomForestClassifier    0.6963             0.5977     0.5862  0.3020    0.3986 0.2442   0.6717  0.5313
+ D_clean_negatives_raw_plus_safety_raw                      XGBoost    0.6853             0.5939     0.5480  0.3195    0.4036 0.2236   0.6555  0.5136
+      E_clean_negatives_derived_scores LogisticRegressionElasticNet    0.6644             0.6333     0.4968  0.5402    0.5176 0.2615   0.6899  0.5637
+      E_clean_negatives_derived_scores       RandomForestClassifier    0.6982             0.6029     0.5878  0.3170    0.4119 0.2527   0.6698  0.5457
+      E_clean_negatives_derived_scores                      XGBoost    0.6894             0.5992     0.5578  0.3289    0.4138 0.2355   0.6568  0.5403
+ F_clean_negatives_knowledge_augmented LogisticRegressionElasticNet    0.6643             0.6327     0.4967  0.5380    0.5165 0.2605   0.6901  0.5656
+ F_clean_negatives_knowledge_augmented       RandomForestClassifier    0.7005             0.6053     0.5944  0.3198    0.4159 0.2589   0.6705  0.5471
+ F_clean_negatives_knowledge_augmented                      XGBoost    0.6894             0.5992     0.5578  0.3289    0.4138 0.2355   0.6568  0.5403
+
+Aggregate Out-of-Fold Confusion Matrices
+-----------------------------------------
+A_random_negatives_raw_features / LogisticRegressionElasticNet: [[4708, 1690], [1528, 1671]]
+A_random_negatives_raw_features / RandomForestClassifier: [[5575, 823], [2206, 993]]
+A_random_negatives_raw_features / XGBoost: [[5506, 892], [2192, 1007]]
+B_clean_negatives_raw_features / LogisticRegressionElasticNet: [[4738, 1660], [1548, 1651]]
+B_clean_negatives_raw_features / RandomForestClassifier: [[5611, 787], [2213, 986]]
+B_clean_negatives_raw_features / XGBoost: [[5585, 813], [2163, 1036]]
+C_random_negatives_raw_plus_safety_raw / LogisticRegressionElasticNet: [[4714, 1684], [1517, 1682]]
+C_random_negatives_raw_plus_safety_raw / RandomForestClassifier: [[5689, 709], [2252, 947]]
+C_random_negatives_raw_plus_safety_raw / XGBoost: [[5464, 934], [2197, 1002]]
+D_clean_negatives_raw_plus_safety_raw / LogisticRegressionElasticNet: [[4755, 1643], [1549, 1650]]
+D_clean_negatives_raw_plus_safety_raw / RandomForestClassifier: [[5716, 682], [2233, 966]]
+D_clean_negatives_raw_plus_safety_raw / XGBoost: [[5555, 843], [2177, 1022]]
+E_clean_negatives_derived_scores / LogisticRegressionElasticNet: [[4648, 1750], [1471, 1728]]
+E_clean_negatives_derived_scores / RandomForestClassifier: [[5687, 711], [2185, 1014]]
+E_clean_negatives_derived_scores / XGBoost: [[5564, 834], [2147, 1052]]
+F_clean_negatives_knowledge_augmented / LogisticRegressionElasticNet: [[4654, 1744], [1478, 1721]]
+F_clean_negatives_knowledge_augmented / RandomForestClassifier: [[5700, 698], [2176, 1023]]
+F_clean_negatives_knowledge_augmented / XGBoost: [[5564, 834], [2147, 1052]]
+
+Best Model per Experiment
+-------------------------
+A) random_negatives + raw_features: LogisticRegressionElasticNet (ROC-AUC=0.6856, F1=0.5095, MCC=0.2552)
+B) clean_negatives + raw_features: LogisticRegressionElasticNet (ROC-AUC=0.6840, F1=0.5072, MCC=0.2545)
+C) random_negatives + raw_plus_safety_raw: LogisticRegressionElasticNet (ROC-AUC=0.6865, F1=0.5124, MCC=0.2594)
+D) clean_negatives + raw_plus_safety_raw: LogisticRegressionElasticNet (ROC-AUC=0.6851, F1=0.5083, MCC=0.2572)
+E) clean_negatives + derived_scores: LogisticRegressionElasticNet (ROC-AUC=0.6899, F1=0.5176, MCC=0.2615)
+F) clean_negatives + knowledge_augmented: LogisticRegressionElasticNet (ROC-AUC=0.6901, F1=0.5165, MCC=0.2605)
+
+Paired Mean Effects Across Models
+---------------------------------
+                                   comparison  balanced_accuracy_delta  f1_score_delta  mcc_delta  roc_auc_delta  pr_auc_delta
+     clean_negatives_effect_with_raw_features                   0.0039          0.0046     0.0111        -0.0012        0.0072
+  clean_negatives_effect_with_raw_plus_safety                   0.0045          0.0059     0.0127         0.0044        0.0102
+ normal_lung_tpm_effect_with_random_negatives                  -0.0001         -0.0026     0.0018         0.0016        0.0010
+  normal_lung_tpm_effect_with_clean_negatives                   0.0006         -0.0013     0.0034         0.0072        0.0040
+   derived_scores_effect_with_clean_negatives                   0.0048          0.0109     0.0082         0.0014        0.0166
+curated_knowledge_effect_with_clean_negatives                   0.0006          0.0010     0.0017         0.0003        0.0011
+Positive deltas mean the second experiment performed better. Each delta is averaged across matching model types.
+
+Top Features of Each Best Model
+-------------------------------
+A_random_negatives_raw_features / LogisticRegressionElasticNet:
+- mutation_count: -1.61254
+- mean_tumor_expression: -1.20596
+- median_tumor_expression: 1.05446
+- mutated_samples: 0.951277
+- mutated_patients: 0.670148
+B_clean_negatives_raw_features / LogisticRegressionElasticNet:
+- mutation_count: -1.2797
+- mean_tumor_expression: -1.26403
+- median_tumor_expression: 1.12799
+- nonsynonymous_mutation_count: 0.730599
+- mutated_patients: 0.662734
+C_random_negatives_raw_plus_safety_raw / LogisticRegressionElasticNet:
+- mutation_count: -1.62747
+- mean_tumor_expression: -1.13287
+- mutated_samples: 0.956527
+- median_tumor_expression: 0.883186
+- mutated_patients: 0.66897
+D_clean_negatives_raw_plus_safety_raw / LogisticRegressionElasticNet:
+- mutation_count: -1.2863
+- mean_tumor_expression: -1.13571
+- median_tumor_expression: 0.917463
+- nonsynonymous_mutation_count: 0.715257
+- mutated_patients: 0.672711
+E_clean_negatives_derived_scores / LogisticRegressionElasticNet:
+- mean_tumor_expression: -1.15414
+- median_tumor_expression: 0.928144
+- mutation_count: -0.758419
+- mutated_samples: 0.479229
+- ranking_score_v3: 0.4757
+F_clean_negatives_knowledge_augmented / LogisticRegressionElasticNet:
+- mean_tumor_expression: -1.15669
+- median_tumor_expression: 0.930696
+- mutation_count: -0.840273
+- mutated_samples: 0.528644
+- mutated_patients: 0.36771
+
+Interpretation
+--------------
+- Effect of clean negatives: with raw features, mean ΔROC-AUC=-0.0012, ΔF1=+0.0046, ΔMCC=+0.0111; with raw plus normal lung TPM, mean ΔROC-AUC=+0.0044, ΔF1=+0.0059, ΔMCC=+0.0127. A gain here reflects the negative-selection rule and may mean the clean negatives are easier to separate.
+- Effect of raw safety feature normal_lung_tpm: with random negatives, mean ΔROC-AUC=+0.0016, ΔF1=-0.0026, ΔMCC=+0.0018; with clean negatives, mean ΔROC-AUC=+0.0072, ΔF1=-0.0013, ΔMCC=+0.0034.
+- Effect of derived ranking/safety scores on the fixed clean dataset: mean ΔROC-AUC=+0.0014, ΔF1=+0.0109, ΔMCC=+0.0082.
+- Effect of curated knowledge features on the same fixed clean dataset: mean ΔROC-AUC=+0.0003, ΔF1=+0.0010, ΔMCC=+0.0017.
+
+Scientific Warning
+------------------
+No dominant post-derived_scores or post-knowledge_augmented ROC-AUC increase was detected under the predefined >0.02 comparison rule. This still does not establish clinical validity.
