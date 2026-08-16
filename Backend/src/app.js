@@ -54,6 +54,16 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use("/uploads", protectUploads, express.static(path.join(__dirname, "uploads")));
 
+// Describes the service at the API root so opening it in a browser is self-explanatory.
+app.get("/", (req, res) =>
+  res.json({
+    service: "curevoo-backend",
+    status: "ok",
+    message: "This is a JSON API, not the web application.",
+    endpoints: { health: "/health", api: "/api" },
+  }),
+);
+
 app.get("/health", (req, res) => res.json({ ok: true }));
 
 app.use("/api/auth", authRoutes);
