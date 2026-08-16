@@ -70,3 +70,6 @@ dip-ai-service/outputs/reports/runs/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Prebuilt Flutter web bundle published as a Render static site.
+!web-dist/
