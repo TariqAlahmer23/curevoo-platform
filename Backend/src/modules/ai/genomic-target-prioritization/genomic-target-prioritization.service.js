@@ -279,6 +279,17 @@ async function checkHealth() {
 
 // Executes the "run genomic target prioritization analysis" workflow.
 async function analyze({ topN, mutationsFile, expressionFile }) {
+  // A lone file is rejected here rather than forwarded. Without this guard the
+  // form below stays empty, the AI service reads the request as a cohort run,
+  // and the caller receives a ranking computed from data they did not upload.
+  if (Boolean(mutationsFile) !== Boolean(expressionFile)) {
+    throw new AppError(
+      "Both a mutation file and an RNA expression file are required to analyse uploaded data.",
+      400,
+      "GENOMIC_ANALYSIS_INPUT_INVALID",
+    );
+  }
+
   await checkHealth();
 
   const form = new FormData();
